@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable, NotFoundException } from "@nestjs/common";
+import { BadRequestException, ConflictException, Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { CategoriaEntity } from "./categoria.entity";
 import { CategoriaRepository } from "./categoria.repository";
@@ -42,7 +42,11 @@ export class CategoriaService {
     async create(dto: CategoriaDto): Promise<any> {
         const { tipoCategoria } = dto;
         const exists = await this.findByNombre(tipoCategoria);
-        if (exists) throw new BadRequestException(new MessageDto('ese nombre ya existe'));
+        if (exists) {
+            throw new ConflictException(
+              new MessageDto('Ya existe una categoría con ese nombre'),
+            );
+          }
         const categoria = this.categoriaRepository.create(dto);
         await this.categoriaRepository.save(categoria);
         return new MessageDto(`categoria ${categoria.tipoCategoria} creado`);

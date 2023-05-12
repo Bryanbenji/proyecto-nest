@@ -13,6 +13,7 @@ import { RolEntity } from './rol/rol.entity';
 import { ProductoEntity } from './producto/producto.entity';
 import { AuthModule } from './auth/auth.module';
 import { CategoriaEntity } from './categoria/categoria.entity';
+import { CategoriaModule } from './categoria/categoria.module';
 
 @Module({
   imports: [
@@ -37,6 +38,7 @@ import { CategoriaEntity } from './categoria/categoria.entity';
     }),
     ProductoModule,
     UsuarioModule,
+    CategoriaModule,
     RolModule,
     AuthModule
   ],
