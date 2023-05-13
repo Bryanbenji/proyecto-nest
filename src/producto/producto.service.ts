@@ -8,6 +8,7 @@ import { CategoriaEntity } from 'src/categoria/categoria.entity';
 import { CategoriaRepository } from 'src/categoria/categoria.repository';
 
 
+
 @Injectable()
 export class ProductoService {
 
@@ -26,7 +27,7 @@ export class ProductoService {
         }
         return list;
     }
-
+    
     async findById(id: number): Promise<ProductoEntity> {
         const producto = await this.productoRepository.findOne({
             where: { id }
@@ -42,10 +43,10 @@ export class ProductoService {
         return producto;
     }
 
-    async create(dto: ProductoDto): Promise<any> {
-        const { nombre, categoriaId } = dto;
+    async create(dto: ProductoDto ): Promise<any> {
+        const { nombre, categoriaId} = dto;
         const exists = await this.findByNombre(nombre);
-        const categoria = await this.categoriaRepository.findOne({ where: { id: categoriaId } });
+        const categoria = await this.categoriaRepository.findOne({ where: { id:  categoriaId } });
         if (!categoria) {
             throw new NotFoundException(`Categoria con id ${categoriaId} no encontrada`);
           }

@@ -3,9 +3,7 @@ import { IsNotBlank } from "src/decorators/is-not-blank.decorator";
 
 export class ProductoDto {
 
-    @IsInt()
-    @IsNotEmpty()
-    categoriaId : number;
+    
 
     @IsNotBlank({ message: 'el nombre no puede estar vacío' })
     nombre?: string;
@@ -27,5 +25,9 @@ export class ProductoDto {
     @IsNotEmpty()
     @Min(1, { message: 'el minimo de ventas realizadas de un producto debe ser 1' })
     totalVendido?: number;
+
+    @IsNumber()
+    @IsNotEmpty()
+    categoriaId ?: number;
 
 }

@@ -1,5 +1,5 @@
 import { CategoriaEntity } from "src/categoria/categoria.entity";
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({name: 'producto'})
 export class ProductoEntity {
@@ -7,7 +7,7 @@ export class ProductoEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({type: 'varchar', length: 10, nullable: false, unique: true})
+    @Column({type: 'varchar', length: 100, nullable: false, unique: true})
     nombre: string;
     
     @Column({type: 'text', nullable: false})
@@ -23,6 +23,7 @@ export class ProductoEntity {
     totalVendido: number;
 
     @ManyToOne(() => CategoriaEntity, categoria => categoria.productos)
+    @JoinColumn({name: 'categoriaId'})
     categoria: CategoriaEntity;
 
 }
