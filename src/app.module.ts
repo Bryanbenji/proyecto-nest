@@ -14,6 +14,8 @@ import { ProductoEntity } from './producto/producto.entity';
 import { AuthModule } from './auth/auth.module';
 import { CategoriaEntity } from './categoria/categoria.entity';
 import { CategoriaModule } from './categoria/categoria.module';
+import { ProveedorModule } from './proveedor/proveedor.module';
+import { ProveedorEntity } from './proveedor/proveedor.entity';
 
 @Module({
   imports: [
@@ -30,7 +32,7 @@ import { CategoriaModule } from './categoria/categoria.module';
         username: configService.get<string>(DB_USER),
         password: configService.get<string>(DB_PASSWORD),
         database: configService.get<string>(DB_DATABASE),
-        entities: [UsuarioEntity,ProductoEntity,RolEntity, CategoriaEntity],
+        entities: [UsuarioEntity,ProductoEntity,RolEntity, CategoriaEntity, ProveedorEntity],
         synchronize: true,
         logging: false
       }),
@@ -39,6 +41,7 @@ import { CategoriaModule } from './categoria/categoria.module';
     ProductoModule,
     UsuarioModule,
     CategoriaModule,
+    ProveedorModule,
     RolModule,
     AuthModule
   ],
