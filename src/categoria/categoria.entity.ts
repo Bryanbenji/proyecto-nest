@@ -12,7 +12,4 @@ export class CategoriaEntity {
     
     @Column({type: 'text', nullable: false})
     descripcion: string;
-  
-    @OneToMany(() => ProductoEntity, producto => producto.categoria)
-    productos: ProductoEntity[];
 }

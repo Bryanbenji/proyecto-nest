@@ -1,5 +1,4 @@
-import { CategoriaEntity } from "src/categoria/categoria.entity";
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity,  PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({name: 'producto'})
 export class ProductoEntity {
@@ -22,8 +21,7 @@ export class ProductoEntity {
     @Column({type: 'int', nullable: false})
     totalVendido: number;
 
-    @ManyToOne(() => CategoriaEntity, categoria => categoria.productos)
-    @JoinColumn({name: 'categoriaId'})
-    categoria: CategoriaEntity;
+    @Column({type: 'varchar', length: 40, nullable: false})
+    categoria: string;
 
 }

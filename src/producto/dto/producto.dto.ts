@@ -26,8 +26,8 @@ export class ProductoDto {
     @Min(1, { message: 'el minimo de ventas realizadas de un producto debe ser 1' })
     totalVendido?: number;
 
-    @IsNumber()
-    @IsNotEmpty()
-    categoriaId ?: number;
+    @IsNotBlank({ message: 'la categoria no puede estar vacío' })
+    categoria?: string;
+
 
 }

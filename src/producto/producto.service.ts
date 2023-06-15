@@ -4,8 +4,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { ProductoDto } from './dto/producto.dto';
 import { ProductoEntity } from './producto.entity';
 import { ProductoRepository } from './producto.repository';
-import { CategoriaEntity } from 'src/categoria/categoria.entity';
-import { CategoriaRepository } from 'src/categoria/categoria.repository';
 
 
 
@@ -13,9 +11,6 @@ import { CategoriaRepository } from 'src/categoria/categoria.repository';
 export class ProductoService {
 
     constructor(
-        @InjectRepository(CategoriaEntity)
-        private categoriaRepository: CategoriaRepository,
-
         @InjectRepository(ProductoEntity)
         private productoRepository: ProductoRepository
     ) { }
@@ -43,16 +38,11 @@ export class ProductoService {
         return producto;
     }
 
-    async create(dto: ProductoDto ): Promise<any> {
-        const { nombre, categoriaId} = dto;
+    async create(dto: ProductoDto): Promise<any> {
+        const { nombre } = dto;
         const exists = await this.findByNombre(nombre);
-        const categoria = await this.categoriaRepository.findOne({ where: { id:  categoriaId } });
-        if (!categoria) {
-            throw new NotFoundException(`Categoria con id ${categoriaId} no encontrada`);
-          }
         if (exists) throw new BadRequestException(new MessageDto('ese nombre ya existe'));
         const producto = this.productoRepository.create(dto);
-        producto.categoria = categoria;
         await this.productoRepository.save(producto);
         return new MessageDto(`producto ${producto.nombre} creado`);
     }
@@ -65,6 +55,7 @@ export class ProductoService {
         if (exists && exists.id !== id) throw new BadRequestException(new MessageDto('ese producto ya existe'));
         dto.nombre ? producto.nombre = dto.nombre : producto.nombre = producto.nombre;
         dto.descripcion ? producto.descripcion = dto.descripcion : producto.descripcion = producto.descripcion;
+        dto.categoria ? producto.categoria = dto.categoria : producto.categoria = producto.categoria;
         dto.precioVenta ? producto.precioVenta = dto.precioVenta : producto.precioVenta = producto.precioVenta;
         dto.precioCompra ? producto.precioCompra = dto.precioCompra : producto.precioCompra = producto.precioCompra;
         dto.totalVendido ? producto.totalVendido = dto.totalVendido : producto.totalVendido = producto.totalVendido;
