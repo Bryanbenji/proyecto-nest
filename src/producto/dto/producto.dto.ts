@@ -8,6 +8,9 @@ export class ProductoDto {
     @IsNotBlank({ message: 'el nombre no puede estar vacío' })
     nombre?: string;
 
+    @IsNotBlank({ message: 'debe ingresar una imagen' })
+    imagenUrl?: string;
+
     @IsNotBlank({ message: 'el nombre no puede estar vacío' })
     descripcion?: string;
 

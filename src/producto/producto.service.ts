@@ -54,6 +54,7 @@ export class ProductoService {
         const exists = await this.findByNombre(dto.nombre);
         if (exists && exists.id !== id) throw new BadRequestException(new MessageDto('ese producto ya existe'));
         dto.nombre ? producto.nombre = dto.nombre : producto.nombre = producto.nombre;
+        dto.imagenUrl ? producto.imagenUrl = dto.imagenUrl : producto.imagenUrl = producto.imagenUrl;
         dto.descripcion ? producto.descripcion = dto.descripcion : producto.descripcion = producto.descripcion;
         dto.categoria ? producto.categoria = dto.categoria : producto.categoria = producto.categoria;
         dto.precioVenta ? producto.precioVenta = dto.precioVenta : producto.precioVenta = producto.precioVenta;
