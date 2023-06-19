@@ -20,6 +20,8 @@ import { ContratoEntity } from './contrato/contrato.entity';
 import { ContratoModule } from './contrato/contrato.module';
 import { DetalleContratoModule } from './detallecontrato/detallecontrato.module';
 import { DetalleContratoEntity } from './detallecontrato/detallecontrato.entity';
+import { ReporteVentaProductoEntity } from './reporteventaproducto/reporteventaproducto.entity';
+import { ReporteVentaProductoModule } from './reporteventaproducto/reporteventaproducto.module';
 
 @Module({
   imports: [
@@ -36,13 +38,14 @@ import { DetalleContratoEntity } from './detallecontrato/detallecontrato.entity'
         username: configService.get<string>(DB_USER),
         password: configService.get<string>(DB_PASSWORD),
         database: configService.get<string>(DB_DATABASE),
-        entities: [UsuarioEntity,ProductoEntity,RolEntity, CategoriaEntity, ProveedorEntity, ContratoEntity, DetalleContratoEntity],
+        entities: [UsuarioEntity,ProductoEntity,ReporteVentaProductoEntity,RolEntity, CategoriaEntity, ProveedorEntity, ContratoEntity, DetalleContratoEntity],
         synchronize: true,
         logging: false
       }),
       inject: [ConfigService],
     }),
     ProductoModule,
+    ReporteVentaProductoModule,
     UsuarioModule,
     CategoriaModule,
     ProveedorModule,

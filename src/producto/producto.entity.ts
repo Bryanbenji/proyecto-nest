@@ -14,15 +14,9 @@ export class ProductoEntity {
     
     @Column({type: 'text', nullable: false})
     descripcion: string;
-  
-    @Column({type: 'float', nullable: false})
-    precioVenta: number;
     
     @Column({type: 'float', nullable: false})
     precioCompra: number;
-    
-    @Column({type: 'int', nullable: false})
-    totalVendido: number;
 
     @Column({type: 'varchar', length: 40, nullable: false})
     categoria: string;

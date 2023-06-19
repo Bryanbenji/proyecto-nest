@@ -17,17 +17,7 @@ export class ProductoDto {
     @IsNumber()
     @IsNotEmpty()
     @Min(0.10, { message: 'el precio debe de ser al menos de 0.10 centavos' })
-    precioVenta?: number;
-
-    @IsNumber()
-    @IsNotEmpty()
-    @Min(0.10, { message: 'el precio debe de ser al menos de 0.10 centavos' })
     precioCompra?: number;
-
-    @IsNumber()
-    @IsNotEmpty()
-    @Min(1, { message: 'el minimo de ventas realizadas de un producto debe ser 1' })
-    totalVendido?: number;
 
     @IsNotBlank({ message: 'la categoria no puede estar vacío' })
     categoria?: string;
