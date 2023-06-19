@@ -6,7 +6,7 @@ export class ContratoEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({type: 'varchar',length: 80, nullable: false, unique: true})
+    @Column({type: 'varchar',length: 100, nullable: false, unique: true})
     identificador: string;
 
     @Column({type: 'date', nullable: false})
@@ -15,11 +15,6 @@ export class ContratoEntity {
     @Column({type: 'date', nullable: false})
     fechaFin: Date;
 
-    @Column({type: 'date', nullable: false})
-    fechaEntregaRealizada: Date;
-    
-    @Column({type: 'text',nullable: false})
-    descripcion: string;
   
     @Column({type: 'varchar', length: 80, nullable: false})
     proveedor: string;

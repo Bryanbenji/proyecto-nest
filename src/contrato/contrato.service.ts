@@ -62,8 +62,6 @@ export class ContratoService {
         dto.identificador ? contrato.identificador = dto.identificador : contrato.identificador = contrato.identificador;
         dto.fechaInicio ? contrato.fechaInicio = dto.fechaInicio : contrato.fechaInicio = contrato.fechaInicio;
         dto.fechaFin ? contrato.fechaFin = dto.fechaFin : contrato.fechaFin = contrato.fechaFin;
-        dto.fechaEntregaRealizada ? contrato.fechaEntregaRealizada = dto.fechaEntregaRealizada : contrato.fechaEntregaRealizada = contrato.fechaEntregaRealizada;
-        dto.descripcion ? contrato.descripcion = dto.descripcion : contrato.descripcion = contrato.descripcion;
         dto.proveedor ? contrato.proveedor = dto.proveedor : contrato.proveedor = contrato.proveedor;
         await this.contratoRepository.save(contrato);
         return new MessageDto(`contrato ${contrato.identificador} actualizado`);

@@ -18,6 +18,8 @@ import { ProveedorModule } from './proveedor/proveedor.module';
 import { ProveedorEntity } from './proveedor/proveedor.entity';
 import { ContratoEntity } from './contrato/contrato.entity';
 import { ContratoModule } from './contrato/contrato.module';
+import { DetalleContratoModule } from './detallecontrato/detallecontrato.module';
+import { DetalleContratoEntity } from './detallecontrato/detallecontrato.entity';
 
 @Module({
   imports: [
@@ -34,7 +36,7 @@ import { ContratoModule } from './contrato/contrato.module';
         username: configService.get<string>(DB_USER),
         password: configService.get<string>(DB_PASSWORD),
         database: configService.get<string>(DB_DATABASE),
-        entities: [UsuarioEntity,ProductoEntity,RolEntity, CategoriaEntity, ProveedorEntity, ContratoEntity],
+        entities: [UsuarioEntity,ProductoEntity,RolEntity, CategoriaEntity, ProveedorEntity, ContratoEntity, DetalleContratoEntity],
         synchronize: true,
         logging: false
       }),
@@ -45,6 +47,7 @@ import { ContratoModule } from './contrato/contrato.module';
     CategoriaModule,
     ProveedorModule,
     ContratoModule,
+    DetalleContratoModule,
     RolModule,
     AuthModule
   ],
