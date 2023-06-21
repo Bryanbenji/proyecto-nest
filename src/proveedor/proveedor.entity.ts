@@ -9,7 +9,7 @@ export class ProveedorEntity {
     @Column({type: 'varchar', length: 13, nullable: false, unique: true})
     ruc: string;
     
-    @Column({type: 'varchar',length: 80, nullable: false})
+    @Column({type: 'varchar',length: 80, nullable: false, unique: true})
     nombre: string;
 
     @Column({type: 'varchar', length: 10, nullable: false, unique: true})

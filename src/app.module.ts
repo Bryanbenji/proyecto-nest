@@ -22,6 +22,8 @@ import { DetalleContratoModule } from './detallecontrato/detallecontrato.module'
 import { DetalleContratoEntity } from './detallecontrato/detallecontrato.entity';
 import { ReporteVentaProductoEntity } from './reporteventaproducto/reporteventaproducto.entity';
 import { ReporteVentaProductoModule } from './reporteventaproducto/reporteventaproducto.module';
+import { TopProductoEntity } from './topproducto/topproducto.entity';
+import { TopProductoModule } from './topproducto/topproducto.module';
 
 @Module({
   imports: [
@@ -38,7 +40,7 @@ import { ReporteVentaProductoModule } from './reporteventaproducto/reporteventap
         username: configService.get<string>(DB_USER),
         password: configService.get<string>(DB_PASSWORD),
         database: configService.get<string>(DB_DATABASE),
-        entities: [UsuarioEntity,ProductoEntity,ReporteVentaProductoEntity,RolEntity, CategoriaEntity, ProveedorEntity, ContratoEntity, DetalleContratoEntity],
+        entities: [UsuarioEntity,ProductoEntity,ReporteVentaProductoEntity,RolEntity, CategoriaEntity, ProveedorEntity, ContratoEntity, DetalleContratoEntity, TopProductoEntity],
         synchronize: true,
         logging: false
       }),
@@ -51,6 +53,7 @@ import { ReporteVentaProductoModule } from './reporteventaproducto/reporteventap
     ProveedorModule,
     ContratoModule,
     DetalleContratoModule,
+    TopProductoModule,
     RolModule,
     AuthModule
   ],

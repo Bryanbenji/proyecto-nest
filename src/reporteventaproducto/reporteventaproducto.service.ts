@@ -33,6 +33,7 @@ export class ReporteVentaProductoService {
         return reporteventaproducto;
     }
 
+    
     async findByNombre(nombre: string): Promise<ReporteVentaProductoEntity> {
         const reporteventaproducto = await this.reporteventaproductoRepository.findOne({where: { nombreproducto: nombre }});
         return reporteventaproducto;
@@ -44,6 +45,7 @@ export class ReporteVentaProductoService {
         if (exists) throw new BadRequestException(new MessageDto('ese nombre ya existe'));
         const reporteventaproducto = this.reporteventaproductoRepository.create(dto);
         await this.reporteventaproductoRepository.save(reporteventaproducto);
+
         return new MessageDto(`reporte de venta de producto ${reporteventaproducto.nombreproducto} creado`);
     }
 
