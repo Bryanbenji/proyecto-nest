@@ -21,4 +21,7 @@ export class ProductoEntity {
     @Column({type: 'varchar', length: 40, nullable: false})
     categoria: string;
 
+    @Column({type: 'varchar',length: 80, nullable: false})
+    nombreproveedor: string;
+
 }

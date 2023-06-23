@@ -57,6 +57,7 @@ export class ProductoService {
         dto.imagenUrl ? producto.imagenUrl = dto.imagenUrl : producto.imagenUrl = producto.imagenUrl;
         dto.descripcion ? producto.descripcion = dto.descripcion : producto.descripcion = producto.descripcion;
         dto.categoria ? producto.categoria = dto.categoria : producto.categoria = producto.categoria;
+        dto.nombreproveedor ? producto.nombreproveedor = dto.nombreproveedor : producto.nombreproveedor = producto.nombreproveedor;
         dto.precioCompra ? producto.precioCompra = dto.precioCompra : producto.precioCompra = producto.precioCompra;
         await this.productoRepository.save(producto);
         return new MessageDto(`producto ${producto.nombre} actualizado`);

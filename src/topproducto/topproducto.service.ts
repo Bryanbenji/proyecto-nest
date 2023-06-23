@@ -16,11 +16,22 @@ export class TopProductoService {
     ) { }
 
     async getAll(): Promise<TopProductoEntity[]> {
-        const list = await this.topproductoRepository.find();
-        if (!list.length) {
-            throw new NotFoundException(new MessageDto('la lista está vacía'));
+        this.calcularRentabilidadProductos;
+        const topproductos = await this.topproductoRepository.find();
+
+        for (let i = 0; i < topproductos.length - 1; i++) {
+          for (let j = i + 1; j < topproductos.length; j++) {
+            if (topproductos[j].puntaje > topproductos[i].puntaje) {
+              // Intercambiar posiciones
+              const temp = topproductos[i];
+              topproductos[i] = topproductos[j];
+              topproductos[j] = temp;
+            }
+          }
         }
-        return list;
+      
+        return topproductos;
+        
     }
     
     async findById(id: number): Promise<TopProductoEntity> {
@@ -68,4 +79,35 @@ export class TopProductoService {
         await this.topproductoRepository.delete(producto);
         return new MessageDto(`producto ${producto.nombre} eliminado`);
     }
+
+
+    async calcularRentabilidadProductos(): Promise<void> {
+        const productos = await this.topproductoRepository.find();
+
+        if (!productos.length) {
+            throw new NotFoundException(new MessageDto('No se encontraron productos'));
+        }
+
+        let puntajeMaximo = 0;
+
+        for (const producto of productos) {
+            if (producto.puntaje > puntajeMaximo) {
+                puntajeMaximo = producto.puntaje;
+            }
+        }
+
+        for (const producto of productos) {
+            const porcentaje = (producto.puntaje / puntajeMaximo) * 100;
+
+            if (porcentaje > 65) {
+                producto.rentabilidad = 'rentable';
+            } else {
+                producto.rentabilidad = 'no rentable';
+            }
+        }
+
+        await this.topproductoRepository.save(productos);
+    }
+
+
 }

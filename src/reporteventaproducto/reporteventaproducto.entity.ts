@@ -6,7 +6,7 @@ export class ReporteVentaProductoEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({type: 'varchar', length: 100, nullable: false, unique: true})
+    @Column({type: 'varchar', length: 100, nullable: false})
     nombreproducto: string;
   
     @Column({type: 'float', nullable: false})

@@ -22,5 +22,8 @@ export class ProductoDto {
     @IsNotBlank({ message: 'la categoria no puede estar vacío' })
     categoria?: string;
 
+    @IsNotBlank({ message: 'el proveedor no puede estar vacío' })
+    nombreproveedor?: string;
+
 
 }

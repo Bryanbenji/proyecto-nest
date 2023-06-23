@@ -26,6 +26,7 @@ export class TopProductoController {
         return await this.topproductoService.findById(id);
     }
 
+
     @RolDecorator(RolNombre.ADMIN)
     @UseGuards(JwtAuthGuard, RolesGuard)
     @UsePipes(new ValidationPipe({whitelist: true}))
