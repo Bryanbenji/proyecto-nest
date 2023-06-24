@@ -24,6 +24,8 @@ import { ReporteVentaProductoEntity } from './reporteventaproducto/reporteventap
 import { ReporteVentaProductoModule } from './reporteventaproducto/reporteventaproducto.module';
 import { TopProductoEntity } from './topproducto/topproducto.entity';
 import { TopProductoModule } from './topproducto/topproducto.module';
+import { ProveedorMasConfiableEntity } from './proveedormasconfiable/proveedormasconfiable.entity';
+import { ProveedorMasConfiableModule } from './proveedormasconfiable/proveedormasconfiable.module';
 
 @Module({
   imports: [
@@ -40,7 +42,7 @@ import { TopProductoModule } from './topproducto/topproducto.module';
         username: configService.get<string>(DB_USER),
         password: configService.get<string>(DB_PASSWORD),
         database: configService.get<string>(DB_DATABASE),
-        entities: [UsuarioEntity,ProductoEntity,ReporteVentaProductoEntity,RolEntity, CategoriaEntity, ProveedorEntity, ContratoEntity, DetalleContratoEntity, TopProductoEntity],
+        entities: [UsuarioEntity,ProductoEntity,ReporteVentaProductoEntity,RolEntity, CategoriaEntity, ProveedorEntity, ContratoEntity, DetalleContratoEntity, TopProductoEntity, ProveedorMasConfiableEntity],
         synchronize: true,
         logging: false
       }),
@@ -54,6 +56,7 @@ import { TopProductoModule } from './topproducto/topproducto.module';
     ContratoModule,
     DetalleContratoModule,
     TopProductoModule,
+    ProveedorMasConfiableModule,
     RolModule,
     AuthModule
   ],
