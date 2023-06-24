@@ -4,6 +4,7 @@ import { ReporteContratoEntity } from "./reportecontrato.entity";
 import { ReporteContratoRepository } from "./reportecontrato.repository";
 import { MessageDto } from "src/common/message.dto";
 import { ReporteContratoDto } from "./dto/reportecontrato.dto";
+import { LessThanOrEqual, MoreThan, MoreThanOrEqual } from "typeorm";
 
 
 
@@ -73,4 +74,36 @@ export class ReporteContratoService {
         await this.reportecontratoRepository.delete(reportecontrato);
         return new MessageDto(`contrato ${reportecontrato.id} eliminado`);
     }
+
+
+
+
+    async getReportBetweenDates(beginDateParam: Date, endDateParam: Date) {
+        const beginDate = new Date(beginDateParam);
+        const endDate = new Date(endDateParam);
+        const report = [];
+    
+        const allContracts = await this.reportecontratoRepository.find({
+            where: {
+                fechaInicio : MoreThanOrEqual(beginDate),
+                fechaFin : LessThanOrEqual(endDate),
+            },
+        });
+
+        const uniqueProviders = [...new Set(allContracts.map((contract) => contract.nombreproveedor))];
+
+        for (const provider of uniqueProviders) {
+            const providerContracts = allContracts.filter((contract) => contract.nombreproveedor === provider);
+            const totalContracts = providerContracts.length;
+
+            report.push({ nombreproveedor: provider, cantidadcontratos: totalContracts});
+
+        }
+
+        return report;
+
+      }
+
+
+      
 }

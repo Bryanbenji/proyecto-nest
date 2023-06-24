@@ -7,6 +7,12 @@ import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, Unauthor
 import { ReporteContratoDto } from './dto/reportecontrato.dto';
 import { RolDecorator } from 'src/decorators/rol.decorator';
 
+
+export interface dateParams {
+    beginDate: Date;
+    endDate: Date;
+  }
+
 @Controller('reportecontrato')
 export class ReporteContratoController {
 
@@ -48,4 +54,12 @@ export class ReporteContratoController {
     async delete(@Param('id', ParseIntPipe) id: number){
         return await this.reportecontratoService.delete(id)
     }
+
+    @Post('/minicore')
+    async minicore(@Body() params: dateParams) {
+    return await this.reportecontratoService.getReportBetweenDates(
+      params.beginDate,
+      params.endDate,
+    );
+  }
 }
