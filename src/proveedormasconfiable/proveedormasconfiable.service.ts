@@ -16,13 +16,32 @@ export class ProveedorMasConfiableService {
 
     ) { }
 
-    async getAll(): Promise<ProveedorMasConfiableEntity[]> {
+    /*async getAll(): Promise<ProveedorMasConfiableEntity[]> {
         const list = await this.proveedormasconfiableRepository.find();
         if (!list.length) {
             throw new NotFoundException(new MessageDto('la lista está vacía'));
         }
         return list;
-    }
+    }*/
+
+    async getAll(): Promise<ProveedorMasConfiableEntity[]> {
+        await this.calcularRecindirContrato();
+        const proveedores = await this.proveedormasconfiableRepository.find();
+      
+        for (let i = 0; i < proveedores.length - 1; i++) {
+          for (let j = i + 1; j < proveedores.length; j++) {
+            if (proveedores[j].puntaje > proveedores[i].puntaje) {
+              // Intercambiar posiciones
+              const temp = proveedores[i];
+              proveedores[i] = proveedores[j];
+              proveedores[j] = temp;
+            }
+          }
+        }
+      
+        return proveedores;
+      }
+      
 
     async findById(id: number): Promise<ProveedorMasConfiableEntity> {
         const proveedorconfiable = await this.proveedormasconfiableRepository.findOne({
@@ -72,4 +91,35 @@ export class ProveedorMasConfiableService {
         await this.proveedormasconfiableRepository.delete(proveedorconfiable);
         return new MessageDto(`proveedor ${proveedorconfiable.nombreproveedor} eliminado`);
     }
+
+
+
+    async calcularRecindirContrato(): Promise<void> {
+        const proveedores = await this.proveedormasconfiableRepository.find();
+      
+        if (!proveedores.length) {
+          throw new NotFoundException(new MessageDto('No se encontraron proveedores'));
+        }
+      
+        let puntajeMaximo = 0;
+      
+        for (const proveedor of proveedores) {
+          if (proveedor.puntaje > puntajeMaximo) {
+            puntajeMaximo = proveedor.puntaje;
+          }
+        }
+      
+        for (const proveedor of proveedores) {
+          const porcentaje = (proveedor.puntaje / puntajeMaximo) * 100;
+      
+          if (porcentaje < 70) {
+            proveedor.recindir = 'recindir contrato';
+          } else {
+            proveedor.recindir = 'continuar contrato';
+          }
+        }
+      
+        await this.proveedormasconfiableRepository.save(proveedores);
+      }
+      
 }
