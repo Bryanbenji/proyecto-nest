@@ -26,6 +26,8 @@ import { TopProductoEntity } from './topproducto/topproducto.entity';
 import { TopProductoModule } from './topproducto/topproducto.module';
 import { ProveedorMasConfiableEntity } from './proveedormasconfiable/proveedormasconfiable.entity';
 import { ProveedorMasConfiableModule } from './proveedormasconfiable/proveedormasconfiable.module';
+import { ReporteContratoEntity } from './reportecontratos/reportecontrato.entity';
+import { ReporteContratoModule } from './reportecontratos/reportecontrato.module';
 
 @Module({
   imports: [
@@ -42,7 +44,7 @@ import { ProveedorMasConfiableModule } from './proveedormasconfiable/proveedorma
         username: configService.get<string>(DB_USER),
         password: configService.get<string>(DB_PASSWORD),
         database: configService.get<string>(DB_DATABASE),
-        entities: [UsuarioEntity,ProductoEntity,ReporteVentaProductoEntity,RolEntity, CategoriaEntity, ProveedorEntity, ContratoEntity, DetalleContratoEntity, TopProductoEntity, ProveedorMasConfiableEntity],
+        entities: [UsuarioEntity,ProductoEntity,ReporteVentaProductoEntity,RolEntity, CategoriaEntity, ProveedorEntity, ContratoEntity, DetalleContratoEntity, TopProductoEntity, ProveedorMasConfiableEntity, ReporteContratoEntity],
         synchronize: true,
         logging: false
       }),
@@ -56,6 +58,7 @@ import { ProveedorMasConfiableModule } from './proveedormasconfiable/proveedorma
     ContratoModule,
     DetalleContratoModule,
     TopProductoModule,
+    ReporteContratoModule,
     ProveedorMasConfiableModule,
     RolModule,
     AuthModule
